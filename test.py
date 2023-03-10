@@ -44,7 +44,7 @@ for file_name in os.listdir("."):
         if cy and zd:
             try:
                 with open(output_file_path, "a") as f:
-                    f.write(f"{cy},{zd}\n")
+                    f.write(f",{cy},{zd}\n")
             except IOError:
                 print("无法写入输出文件")
                 sys.exit(1)
