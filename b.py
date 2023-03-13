@@ -12,7 +12,7 @@ if not os.path.exists(output_dir):
 output_file_path = os.path.join(output_dir, "output.txt")
 try:
     with open(output_file_path, "w") as f:
-        f.write("姓名,性别,诊断\n")
+        f.write("姓名,性别,身份证号,诊断\n")
 except IOError:
     print("无法打开输出文件")
     sys.exit(1)
@@ -32,7 +32,7 @@ for file_name in os.listdir("."):
     # 遍历Word文件中的所有表格
     for table in document.tables:
         # 查找需要的信息
-        name = sex = zd = None
+        name = sex = id = zd = None
         for row in table.rows:
             for i, cell in enumerate(row.cells):
                 text = cell.text.strip()
@@ -40,6 +40,8 @@ for file_name in os.listdir("."):
                     name = row.cells[i+1].text.strip()
                 elif text == "性别":
                     sex = row.cells[i+1].text.strip()
+                elif text == "身份证号":
+                    id = row.cells[i+1].text.strip()
                                   
                 elif text == "诊断":
                     zd = row.cells[i+1].text.strip()
@@ -47,12 +49,12 @@ for file_name in os.listdir("."):
                     
 
         # 输出结果到文件
-        if name and sex and zd:
+        if name and sex and id and zd:
             print(zd)
             
             try:
                 with open(output_file_path, "a") as f:
-                    f.write(f"{name},{sex},{zd}\n")
+                    f.write(f"{name},{sex},{id},{zd}\n")
             except IOError:
                 print("无法写入输出文件")
                 sys.exit(1)
