@@ -38,19 +38,23 @@ for file_name in os.listdir("."):
                 text = cell.text.strip()
                 if text == "姓名":
                     name = row.cells[i+1].text.strip()
+                    print(name)
                 elif text == "性别":
                     sex = row.cells[i+1].text.strip()
+                    print(sex)
                 elif text == "身份证号":
                     id = row.cells[i+1].text.strip()
-                                  
+                    print(id)
                 elif text == "诊断":
                     zd = row.cells[i+1].text.strip()
                     zd = re.sub(r'\s+', ' ', zd)
+                    print(zd)
                     
 
         # 输出结果到文件
-        if name and sex and id and zd:
+        if name or id and zd:
             print(zd)
+            print(id)
             
             try:
                 with open(output_file_path, "a") as f:
@@ -70,3 +74,5 @@ for file_name in os.listdir("."):
 
 # 输出完成信息
 print("输出完成")
+
+##以上代码中，
